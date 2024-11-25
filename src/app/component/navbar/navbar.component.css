@@ -1,0 +1,228 @@
+* {
+    box-sizing: border-box;
+    font-size: 20px;
+    font-family: sans-serif;
+    font-weight: lighter;
+}
+
+.navbar {
+    background: linear-gradient(135deg, #073c6f 40%, #8bb349);
+    margin-top: 1px;
+    margin-bottom: 1px;
+    padding-bottom: 40px;
+}
+
+/* Menú principal */
+.menu-principal ul {
+    display: flex;
+    justify-content: center;
+    /* Centrar el menú principal */
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    flex-direction: row;
+    /* Mostrar en línea horizontal */
+    text-align: center;
+    color: white;
+}
+
+.menu-principal li {
+    position: static;
+    /* Para los submenús flotantes */
+    width: auto;
+    /* Asigna un ancho fijo */
+    margin-left: 15px;
+    white-space: nowrap;
+    /* Evita saltos de línea */
+    padding: 1px 1px;
+    /* Espaciado interno */
+    display: flex;
+    align-items: center;
+    /* Centrar verticalmente el contenido */
+    justify-content: center;
+    /* Centrar horizontalmente el contenido */
+    box-sizing: border-box;
+    /* Asegura que padding/border no afecte el tamaño */
+    transition: background-color 0.3s ease;
+}
+
+.menu-principal li a {
+    color: #333;
+    width: 100%;
+    /* Asegura que el enlace llene el li */
+    text-align: center;
+    text-decoration: none;
+    color: white;
+}
+
+/* Hover para destacar los elementos del menú principal */
+.menu-principal li:hover {
+    border-bottom: 3px solid rgb(0, 0, 0);
+    background-color: #d1d2d6;
+    /* Fondo claro en hover */
+}
+
+/* Submenú de segundo nivel: por defecto visible y horizontal */
+.menu-principal .sf-hidden {
+    display: flex;
+    justify-content: center;
+    /* Centrar los submenús */
+    position: absolute;
+    top: 50%;
+    /* Mostrar debajo del menú principal */
+    left: 50%;
+    transform: translateX(-50%);
+    /* Centrar submenú */
+    opacity: 0;
+    visibility: hidden;
+    /* Ocultar por defecto */
+    transition: all 0.3s ease;
+    /* Transición suave al mostrar */
+    z-index: 1000;
+    /* Asegura que esté encima */
+    border-bottom: 3px solid rgb(18, 131, 224);
+}
+
+.menu-principal li:hover>.sf-hidden {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Submenús de segundo nivel alineados en horizontal */
+.menu-principal .sf-hidden li {
+    display: inline-block;
+    width: 100%;
+    /* Asegura que cada li ocupe todo el ancho */
+    height: 30px;
+    /*  Asigna altura uniforme */
+    transition: background-color 0.3s ease;
+}
+
+.menu-principal .sf-hidden li:hover {
+    border-bottom: none;
+    background-color: #85868f;
+    /* Fondo más oscuro en hover */
+}
+
+.menu-principal .sf-hidden li a {
+    line-height: normal;
+    /* Centrar texto verticalmente */
+}
+
+/* Submenús de tercer nivel: oculto por defecto y desplegado horizontalmente */
+.menu-principal .sf-hidden .sf-hidden {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    flex-direction: row;
+    border-bottom: none;
+}
+
+/* Mostrar el submenú de tercer nivel al hacer hover */
+.menu-principal .sf-hidden li:hover>.sf-hidden {
+    display: flex;
+}
+
+/* Alinear los elementos del tercer nivel */
+.menu-principal .sf-hidden .sf-hidden li {
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+.menu-principal .sf-hidden .sf-hidden li:hover {
+    background-color: #6d7e98;
+    /* Fondo más oscuro para tercer nivel */
+}
+
+/* Ajustes opcionales para una transición más fluida */
+.menu-principal .sf-hidden {
+    transition: visibility 0.3s, opacity 0.3s ease;
+}
+
+/* Estilo general para los submenús */
+.navbar-nav .sf-hidden {
+    position: absolute;
+    /* Para permitir la superposición */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    /* Sombra para destacar */
+    border-radius: 1px;
+    /* Bordes redondeados */
+}
+
+/* Ajustes responsivos */
+.navbar-brand img {
+    max-height: 80px;
+    /* Ajusta el tamaño en pantallas pequeñas */
+}
+
+.navbar-nav {
+    flex-wrap: wrap;
+    /* Permite que los elementos se ajusten en pantallas pequeñas */
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .menu-principal ul {
+        flex-direction: column;
+        /* Cambia a diseño vertical */
+        align-items: flex-start;
+    }
+
+    .menu-principal li {
+        margin-left: 0;
+        /* Elimina el margen izquierdo */
+    }
+    .menu-principal .sf-hidden {
+        position: absolute;
+        top: 20%;
+        left: 35%;
+        transform: translateX(-50%);
+        flex-direction: column;
+        width: max-content;
+    }
+
+    .menu-principal .sf-hidden li {
+        display: block;
+        width: auto;
+        padding: 5px 15px;
+    }
+
+    .menu-principal .sf-hidden li:hover {
+        background-color: #d1d2d6;
+    }
+}
+
+@media (max-width: 768px) {
+    * {
+        font-size: 15px; 
+    }
+    .menu-principal ul {
+        flex-direction: column;
+        /* Cambia a diseño vertical */
+        align-items: flex-start;
+    }
+
+    .menu-principal li {
+        margin-left: 0;
+        /* Elimina el margen izquierdo */
+    }
+    .menu-principal .sf-hidden {
+        position: absolute;
+        top: 7%;
+        left: 50%;
+        transform: translateX(-50%);
+        flex-direction: column;
+        width: max-content;
+    }
+
+    .menu-principal .sf-hidden li {
+        display: block;
+        width: auto;
+        padding: 5px 15px;
+    }
+
+    .menu-principal .sf-hidden li:hover {
+        background-color: #d1d2d6;
+    }
+}

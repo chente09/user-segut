@@ -1,0 +1,57 @@
+<!-- Carrusel con desplazamiento automático -->
+<div id="carousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="3000"
+    style="max-width: 1200px; margin: 0 auto;">
+
+    <!-- Indicadores del carrusel -->
+    <div class="carousel-indicators">
+        <button *ngFor="let imagen of imagenes; let i = index" type="button" data-bs-target="#carousel"
+            [attr.data-bs-slide-to]="i" [class.active]="i === 0" [attr.aria-current]="i === 0 ? 'true' : null"
+            [attr.aria-label]="'Slide ' + (i + 1)">
+        </button>
+    </div>
+
+    <!-- Contenedor de imágenes -->
+    <div class="carousel-inner">
+        <div *ngFor="let imagen of imagenes; let i = index" [ngClass]="{'carousel-item': true, 'active': i === 0}">
+            <img [src]="imagen.url" [alt]="imagen.name" class="d-block w-100"
+                style="width: 100%; height: 400px; object-fit: cover;" />
+
+            <!-- Superposición de texto -->
+            <div class="carousel-caption d-none d-md-block">
+                <button class="btn btn-primary mt-2">Ver Más</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Controles de navegación -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Anterior</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Siguiente</span>
+    </button>
+</div>
+
+
+<div class="container py-5">
+    <div class="text-center mb-4">
+        <h1>Conoce Segut</h1>
+    </div>
+    <div class="d-flex flex-wrap justify-content-center">
+        <div *ngFor="let card of cards" class="card m-3" style="width: 18rem;">
+            <nz-card style="width: 300px;" [nzCover]="coverTemplate">
+                <nz-card-meta [nzTitle]="card.title" [nzDescription]="card.description" [nzAvatar]="avatarTemplate">
+                </nz-card-meta>
+            </nz-card>
+
+            <ng-template #avatarTemplate>
+                <nz-avatar [nzSrc]="card.imageUrl"></nz-avatar>
+            </ng-template>
+            <ng-template #coverTemplate>
+                <img alt="Imagen de tarjeta" [src]="card.imageUrl" />
+            </ng-template>
+        </div>
+    </div>
+</div>
