@@ -1,0 +1,10 @@
+* {
+    color: white;
+}
+
+.footer {
+    background: linear-gradient(135deg, #073c6f 40%, #8bb349);
+    margin-top: 1px;
+    margin-bottom: 1px;
+    padding-bottom: 40px;
+}
