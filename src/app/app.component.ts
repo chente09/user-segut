@@ -12,6 +12,7 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NavbarComponent } from './component/navbar/navbar.component';
 import { FooterComponent } from './component/footer/footer.component';
+import { WppComponent } from './component/wpp/wpp.component';
 
 
 
@@ -31,7 +32,8 @@ import { FooterComponent } from './component/footer/footer.component';
     NzToolTipModule,
     NzTableModule,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    WppComponent
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']

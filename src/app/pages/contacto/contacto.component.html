@@ -1,0 +1,178 @@
+<div class="contact-container">
+    <!-- Ubicación en Google Maps -->
+    <div class="maps-section">
+        <h2>Encuentra nuestra ubicación</h2>
+        <div id="map">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7979.582720752664!2d-78.50317300961238!3d-0.21063037034746226!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91d59a3d550b7be3%3A0xb172b289a3b0d6b2!2sEl%20Ejido%2C%20Quito!5e0!3m2!1ses!2sec!4v1741356989841!5m2!1ses!2sec"
+                width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </div>
+
+
+    <!-- Redes sociales -->
+    <div class="social-section">
+        <h2>Síguenos</h2>
+        <div class="social-icons">
+            <a href="https://www.facebook.com/profile.php?id=61570375378118" target="_blank" class="social-icon">
+                <i class="fab fa-facebook"></i>
+            </a>
+            <a href="https://www.instagram.com/segutempresa/" target="_blank" class="social-icon">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.tiktok.com/@segutempresa" target="_blank" class="social-icon">
+                <i class="fab fa-tiktok"></i>
+            </a>
+            <a href="https://x.com/Segutempresa" target="_blank" class="social-icon">
+                <i class="fab bi-twitter-x"></i>
+            </a>
+            
+        </div>
+    </div>
+    <div class="form-section">
+        <nz-card [nzBordered]="false" [nzCover]="coverTemplate">
+            <ng-template #coverTemplate>
+                <div class="cover-container">
+                    <img alt="cover image" src="https://i.postimg.cc/3RF71BMc/form.jpg"
+                        class="cover-image" />
+                </div>
+            </ng-template>
+
+            <!-- Selección de formulario -->
+            <div *ngIf="!selectedForm" class="form-selection">
+                <button nz-button (click)="selectForm('consulta')" [nzSize]="'large'">¿Tienes una
+                    consulta?</button>
+                <button nz-button (click)="selectForm('colaborador')" [nzSize]="'large'">
+                    Cuéntanos tu historia</button>
+            </div>
+
+            <!-- Formulario de consulta -->
+            <div *ngIf="selectedForm === 'consulta'" class="form-container">
+                <nz-card [nzBordered]="false" class="contact-form">
+                    <button nzType="text" class="close-button" (click)="closeForm()" aria-label="Cerrar formulario">
+                        <i nz-icon nzType="close" nzTheme="outline"></i>
+                    </button>
+                    <h2>¿Cómo podemos ayudarte?</h2>
+                    <form nz-form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+                        <nz-form-item>
+                            <nz-form-label [nzSpan]="6" nzFor="name">Nombre</nz-form-label>
+                            <nz-form-control [nzSpan]="18" [nzErrorTip]="nameErrorTpl">
+                                <nz-input-group [nzPrefixIcon]="'user'">
+                                    <input nz-input formControlName="name" id="name" placeholder="Ingresa tu nombre" />
+                                </nz-input-group>
+                            </nz-form-control>
+                            <ng-template #nameErrorTpl>
+                                <div *ngIf="contactForm.get('name')?.touched && contactForm.get('name')?.invalid">
+                                    <p>El nombre es obligatorio (mínimo 3 caracteres).</p>
+                                </div>
+                            </ng-template>
+                        </nz-form-item>
+
+                        <nz-form-item>
+                            <nz-form-label [nzSpan]="6" nzFor="lastName">Apellido</nz-form-label>
+                            <nz-form-control [nzSpan]="18" [nzErrorTip]="lastNameErrorTpl">
+                                <nz-input-group [nzPrefixIcon]="'user'">
+                                    <input nz-input formControlName="lastName" id="lastName"
+                                        placeholder="Ingresa tu apellido" />
+                                </nz-input-group>
+                            </nz-form-control>
+                            <ng-template #lastNameErrorTpl>
+                                <div
+                                    *ngIf="contactForm.get('lastName')?.touched && contactForm.get('lastName')?.invalid">
+                                    <p>El apellido es obligatorio (mínimo 3 caracteres).</p>
+                                </div>
+                            </ng-template>
+                        </nz-form-item>
+
+                        <nz-form-item>
+                            <nz-form-label [nzSpan]="6" nzFor="email">Correo</nz-form-label>
+                            <nz-form-control [nzSpan]="18" [nzErrorTip]="emailErrorTpl">
+                                <nz-input-group [nzPrefixIcon]="'mail'">
+                                    <input nz-input formControlName="email" id="email"
+                                        placeholder="Ingresa tu correo" />
+                                </nz-input-group>
+                            </nz-form-control>
+                            <ng-template #emailErrorTpl>
+                                <div *ngIf="contactForm.get('email')?.touched && contactForm.get('email')?.invalid">
+                                    <p>El correo es obligatorio y debe ser válido.</p>
+                                </div>
+                            </ng-template>
+                        </nz-form-item>
+
+                        <nz-form-item>
+                            <nz-form-label [nzSpan]="6" nzFor="message">Mensaje</nz-form-label>
+                            <nz-form-control [nzSpan]="18">
+                                <textarea nz-input formControlName="message" id="message"
+                                    placeholder="Escribe tu mensaje"></textarea>
+                            </nz-form-control>
+                        </nz-form-item>
+
+                        <button class="submit-button" [disabled]="contactForm.invalid">Enviar</button>
+                    </form>
+                </nz-card>
+            </div>
+
+            <!-- Formulario para colaboradores -->
+            <div *ngIf="selectedForm === 'colaborador'" class="form-container">
+                <nz-card [nzBordered]="false" class="contact-form">
+                    <button nzType="text" class="close-button" (click)="closeForm()" aria-label="Cerrar formulario">
+                        <i nz-icon nzType="close" nzTheme="outline"></i>
+                    </button>
+                    <h2>Cuéntanos tu historia</h2>
+                    <form nz-form [formGroup]="collaboratorForm" (ngSubmit)="onCollaboratorSubmit()">
+                        <nz-form-item>
+                            <nz-form-label [nzSpan]="6" nzFor="name">Nombre</nz-form-label>
+                            <nz-form-control [nzSpan]="18">
+                                <nz-input-group [nzPrefixIcon]="'user'">
+                                    <input nz-input formControlName="name" id="name"
+                                        placeholder="Ingresa tu nombre completo" />
+                                </nz-input-group>
+                            </nz-form-control>
+                        </nz-form-item>
+
+                        <nz-form-item>
+                            <nz-form-label [nzSpan]="6" nzFor="lastName">Apellido</nz-form-label>
+                            <nz-form-control [nzSpan]="18">
+                                <nz-input-group [nzPrefixIcon]="'user'">
+                                    <input nz-input formControlName="lastName" id="lastName"
+                                        placeholder="Ingresa tu apellido" />
+                                </nz-input-group>
+                            </nz-form-control>
+                        </nz-form-item>
+
+                        <nz-form-item>
+                            <nz-form-label [nzSpan]="6" nzFor="email">Correo</nz-form-label>
+                            <nz-form-control [nzSpan]="18">
+                                <nz-input-group [nzPrefixIcon]="'mail'">
+                                    <input nz-input formControlName="email" id="email"
+                                        placeholder="Ingresa tu correo" />
+                                </nz-input-group>
+                            </nz-form-control>
+                        </nz-form-item>
+
+                        <nz-form-item>
+                            <nz-form-label [nzSpan]="6" nzFor="phone">Teléfono</nz-form-label>
+                            <nz-form-control [nzSpan]="18">
+                                <nz-input-group [nzPrefixIcon]="'phone'">
+                                    <input nz-input formControlName="phone" id="phone"
+                                        placeholder="Ingresa tu número de teléfono" />
+                                </nz-input-group>
+                            </nz-form-control>
+                        </nz-form-item>
+
+                        <nz-form-item>
+                            <nz-form-label [nzSpan]="6" nzFor="skills">Experiencia</nz-form-label>
+                            <nz-form-control [nzSpan]="18">
+                                <textarea nz-input formControlName="skills" id="skills"
+                                    placeholder="Escribe tu historia"></textarea>
+                            </nz-form-control>
+                        </nz-form-item>
+
+                        <button class="submit-button" [disabled]="collaboratorForm.invalid">Enviar</button>
+                    </form>
+                </nz-card>
+            </div>
+        </nz-card>
+    </div>
+</div>
