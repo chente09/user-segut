@@ -26,17 +26,21 @@ export class WppComponent {
 
   loadVoiceflowChatbot(): void {
     const script = this.renderer.createElement('script');
-    script.src = 'https://cdn.voiceflow.com/widget/bundle.mjs';
+    script.src = 'https://cdn.voiceflow.com/widget-next/bundle.mjs';
     script.type = 'text/javascript';
     script.onload = () => {
       (window as any).voiceflow?.chat.load({
         verify: { projectID: '67153dbdfb911cff2f08be8a' },
         url: 'https://general-runtime.voiceflow.com',
-        versionID: 'production'
+        versionID: 'production',
+        voice: {
+          url: 'https://runtime-api.voiceflow.com'
+        }
       });
     };
-
+  
     document.body.appendChild(script);
   }
+  
 
 }
